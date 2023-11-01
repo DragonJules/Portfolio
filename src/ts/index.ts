@@ -51,7 +51,7 @@ loadProjects()
 
 
 async function loadProjects () {
-    const projectCardHtmlTemplate = await fetch('Portfolio/views/project_card.html').then(res => res.text())
+    const projectCardHtmlTemplate = await fetch('views/project_card.html').then(res => res.text())
 
     let rawProjectsData = await fetch(PROJECTS_DATABASE_PATH).then(res => res.text())
     let projectsData = JSON.parse(rawProjectsData)

@@ -49,7 +49,7 @@ const projectCards = [];
 loadProjects();
 function loadProjects() {
     return __awaiter(this, void 0, void 0, function* () {
-        const projectCardHtmlTemplate = yield fetch('Portfolio/views/project_card.html').then(res => res.text());
+        const projectCardHtmlTemplate = yield fetch('views/project_card.html').then(res => res.text());
         let rawProjectsData = yield fetch(PROJECTS_DATABASE_PATH).then(res => res.text());
         let projectsData = JSON.parse(rawProjectsData);
         let projectsList = projectsData.projects;
