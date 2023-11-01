@@ -46,10 +46,13 @@ const projectCardElementList: HTMLElement[] = []
 
 const projectCards: ProjectCard[] = []
 
+
 loadProjects()
 
 
 async function loadProjects () {
+    const projectCardHtmlTemplate = await fetch('../../src/views/project_card.html').then(res => res.text())
+
     let rawProjectsData = await fetch(PROJECTS_DATABASE_PATH).then(res => res.text())
     let projectsData = JSON.parse(rawProjectsData)
     let projectsList = projectsData.projects as Record<string, any>[]
@@ -67,7 +70,7 @@ async function loadProjects () {
 
     
     projectCards.forEach(async (projectCard, index) => {
-        const projectCardElement = await projectCard.render()
+        const projectCardElement = await projectCard.render(projectCardHtmlTemplate)
         projectsWrapper?.appendChild(projectCardElement)
 
         bindOpenLinkButton(projectCardElement.querySelector('button.project-card__link-to-project')!)
@@ -75,7 +78,7 @@ async function loadProjects () {
         projectCardElement.style.transitionDelay = `${(index + 1) * 200}ms`
         observer.observe(projectCardElement)
 
-        projectCardElement.onmousemove = e => handleOnMouseMove(e)
+        // projectCardElement.onmousemove = e => handleOnMouseMove(e)
 
         projectCardElementList.push(projectCardElement)
     })
@@ -91,53 +94,53 @@ async function loadProjects () {
 
 
 // mouse trailer
-const isDeviceTouch = 'ontouchstart' in document.documentElement
+// const isDeviceTouch = 'ontouchstart' in document.documentElement
 
-const trailer = document.querySelector('.trailer') as HTMLDivElement
+// const trailer = document.querySelector('.trailer') as HTMLDivElement
 
-if (isDeviceTouch) trailer.style.display = 'none'
+// if (isDeviceTouch) trailer.style.display = 'none'
 
-const animateTrailer = (e: MouseEvent, interacting: Boolean) => {
-    const x = e.clientX - trailer?.offsetWidth / 2,
-        y = e.clientY - trailer?.offsetHeight / 2;
+// const animateTrailer = (e: MouseEvent, interacting: Boolean) => {
+//     const x = e.clientX - trailer?.offsetWidth / 2,
+//         y = e.clientY - trailer?.offsetHeight / 2;
     
-    const keyframes = {
-        transform: `translate(${x}px, ${y}px) scale(${interacting ? 3 : 1})`
-    }
+//     const keyframes = {
+//         transform: `translate(${x}px, ${y}px) scale(${interacting ? 3 : 1})`
+//     }
     
-    trailer.animate(keyframes, { 
-        duration: 800, 
-        fill: 'forwards' 
-    });
-}
+//     trailer.animate(keyframes, { 
+//         duration: 800, 
+//         fill: 'forwards' 
+//     });
+// }
 
-const getTrailerIconSrc = (interactableType: string) => {
-    switch (interactableType) {
-        case 'scroll':
-            return 'assets/images/scroll-cta.svg';
-        case 'ext':
-            return 'assets/images/arrow-ext.svg';
-        default:
-            return 'assets/images/arrow-right.svg'; 
-    }
-  }
+// const getTrailerIconSrc = (interactableType: string) => {
+//     switch (interactableType) {
+//         case 'scroll':
+//             return 'assets/images/scroll-cta.svg';
+//         case 'ext':
+//             return 'assets/images/arrow-ext.svg';
+//         default:
+//             return 'assets/images/arrow-right.svg'; 
+//     }
+//   }
 
-window.addEventListener('mousemove', (e: MouseEvent) => { 
-    if (isDeviceTouch) return
+// window.addEventListener('mousemove', (e: MouseEvent) => { 
+//     if (isDeviceTouch) return
 
-    const interactable = (e.target as HTMLElement).closest('.interactable'),
-    interacting = interactable !== null;
+//     const interactable = (e.target as HTMLElement).closest('.interactable'),
+//     interacting = interactable !== null;
 
-    const icon = document.querySelector('.trailer-icon') as HTMLImageElement
+//     const icon = document.querySelector('.trailer-icon') as HTMLImageElement
 
-    animateTrailer(e, interacting);
-    trailer.dataset.interactableType = interacting ? interactable.getAttribute('data-interactable-type')! : '';
+//     animateTrailer(e, interacting);
+//     trailer.dataset.interactableType = interacting ? interactable.getAttribute('data-interactable-type')! : '';
 
-    if(interacting) {
-        icon.src = getTrailerIconSrc(interactable.getAttribute('data-interactable-type')!);
-    }
+//     if(interacting) {
+//         icon.src = getTrailerIconSrc(interactable.getAttribute('data-interactable-type')!);
+//     }
     
-})
+// })
 
 // changing text animation
 const changingTextElements = document.querySelectorAll('.changing-text') as NodeListOf<HTMLElement>
@@ -175,104 +178,104 @@ scrollRevealElements.forEach((el) => observer.observe(el))
 
 
 // glass over effect
-const glassElements = document.querySelectorAll('.glass, .glass-header') as NodeListOf<HTMLElement>
+// const glassElements = document.querySelectorAll('.glass, .glass-header') as NodeListOf<HTMLElement>
 
-if (isDeviceTouch) document.body.style.setProperty('--glass-effect-display', 'none')
+// if (isDeviceTouch) document.body.style.setProperty('--glass-effect-display', 'none')
 
-const handleOnMouseMove = (e: MouseEvent) => {
-    if (isDeviceTouch) return
-    const target = e.currentTarget as HTMLElement
+// const handleOnMouseMove = (e: MouseEvent) => {
+//     if (isDeviceTouch) return
+//     const target = e.currentTarget as HTMLElement
 
-    const rect = target.getBoundingClientRect(),
-          x = e.clientX - rect.left,
-          y = e.clientY - rect.top;
+//     const rect = target.getBoundingClientRect(),
+//           x = e.clientX - rect.left,
+//           y = e.clientY - rect.top;
 
-    target.style.setProperty("--mouse-x", `${x}px`);
-    target.style.setProperty("--mouse-y", `${y}px`);
-}
+//     target.style.setProperty("--mouse-x", `${x}px`);
+//     target.style.setProperty("--mouse-y", `${y}px`);
+// }
 
 
-glassElements.forEach((element) => {
-    element.onmousemove = e => handleOnMouseMove(e)
-})
+// glassElements.forEach((element) => {
+//     element.onmousemove = e => handleOnMouseMove(e)
+// })
 
 // form validation
-const inputFieldsElements = [...document.querySelectorAll('.input-field')]
-const labels = inputFieldsElements.map((element) => element.querySelector('label') as HTMLLabelElement)
-const formInputs = inputFieldsElements.map((element) => element.querySelector('input, textarea') as HTMLInputElement | HTMLTextAreaElement)
+// const inputFieldsElements = [...document.querySelectorAll('.input-field')]
+// const labels = inputFieldsElements.map((element) => element.querySelector('label') as HTMLLabelElement)
+// const formInputs = inputFieldsElements.map((element) => element.querySelector('input, textarea') as HTMLInputElement | HTMLTextAreaElement)
 
-let timer: number | undefined
+// let timer: number | undefined
 
-const isInputValid = (input: HTMLInputElement | HTMLTextAreaElement) => {
-    const pattern = input.getAttribute('data-regexp')
+// const isInputValid = (input: HTMLInputElement | HTMLTextAreaElement) => {
+//     const pattern = input.getAttribute('data-regexp')
 
-    if (!pattern && input.value.length !== 0) return true
-    if (!pattern && input.value.length === 0) return false
-    if (pattern && input.value.match(new RegExp(pattern, 'g'))) return true
-}
+//     if (!pattern && input.value.length !== 0) return true
+//     if (!pattern && input.value.length === 0) return false
+//     if (pattern && input.value.match(new RegExp(pattern, 'g'))) return true
+// }
 
-const handleInputChange = (input: HTMLInputElement | HTMLTextAreaElement, index: number) => {
-    let labelDefaultText = input.getAttribute('placeholder')!
+// const handleInputChange = (input: HTMLInputElement | HTMLTextAreaElement, index: number) => {
+//     let labelDefaultText = input.getAttribute('placeholder')!
 
-    if (input.value.length === 0) {
-        inputFieldsElements[index].classList.add('empty')
-        inputFieldsElements[index].classList.remove('invalid')
-        labels[index].innerText = labelDefaultText
-    }
-    else {
-        inputFieldsElements[index].classList.remove('empty')
+//     if (input.value.length === 0) {
+//         inputFieldsElements[index].classList.add('empty')
+//         inputFieldsElements[index].classList.remove('invalid')
+//         labels[index].innerText = labelDefaultText
+//     }
+//     else {
+//         inputFieldsElements[index].classList.remove('empty')
 
-        const valid = isInputValid(input)
+//         const valid = isInputValid(input)
         
-        clearTimeout(timer)
+//         clearTimeout(timer)
 
-        inputFieldsElements[index].classList.remove('invalid')
-        labels[index].innerText = labelDefaultText
+//         inputFieldsElements[index].classList.remove('invalid')
+//         labels[index].innerText = labelDefaultText
 
-        timer = setTimeout(() => {
-            if (!valid && input.value.length !== 0) {
-                inputFieldsElements[index].classList.add('invalid')
+//         timer = setTimeout(() => {
+//             if (!valid && input.value.length !== 0) {
+//                 inputFieldsElements[index].classList.add('invalid')
 
-                labels[index].innerText = `${labelDefaultText} - ${input.getAttribute('data-field-invalid-message')}`
-            }
-        }, 500)
-    }
-}
+//                 labels[index].innerText = `${labelDefaultText} - ${input.getAttribute('data-field-invalid-message')}`
+//             }
+//         }, 500)
+//     }
+// }
 
-formInputs.forEach((input, index) => {
-    input.addEventListener('input', () => {
-        handleInputChange(input, index)
-    })
-    handleInputChange(input, index)
-})
+// formInputs.forEach((input, index) => {
+//     input.addEventListener('input', () => {
+//         handleInputChange(input, index)
+//     })
+//     handleInputChange(input, index)
+// })
 
 
-const formButton = document.querySelector('.contact__submit-button')
+// const formButton = document.querySelector('.contact__submit-button')
 
-formButton?.addEventListener('click', (e) => {
-    let allInputsValid = true;
-    formInputs.forEach((input, index) => {
-        if (!isInputValid(input)) {
-            e.preventDefault()
+// formButton?.addEventListener('click', (e) => {
+//     let allInputsValid = true;
+//     formInputs.forEach((input, index) => {
+//         if (!isInputValid(input)) {
+//             e.preventDefault()
 
-            inputFieldsElements[index].classList.add('invalid')
-            labels[index].innerText = `${input.getAttribute('placeholder')!} - ${input.getAttribute('data-field-invalid-message')}`
-            allInputsValid = false
-        }
-    })
+//             inputFieldsElements[index].classList.add('invalid')
+//             labels[index].innerText = `${input.getAttribute('placeholder')!} - ${input.getAttribute('data-field-invalid-message')}`
+//             allInputsValid = false
+//         }
+//     })
 
-    if (allInputsValid) {
-        let formData: Record<string, string> = {}
-        formInputs.forEach((input, index) => {
-            formData[input.getAttribute('name')!] = input.value
-            input.value = ""
-            inputFieldsElements[index].classList.add('empty')
-        })
+//     if (allInputsValid) {
+//         let formData: Record<string, string> = {}
+//         formInputs.forEach((input, index) => {
+//             formData[input.getAttribute('name')!] = input.value
+//             input.value = ""
+//             inputFieldsElements[index].classList.add('empty')
+//         })
 
-        console.log(formData)
-        toast('Message Sent !', ToasterStatus.SUCCESS)
-    }
-})
+//         console.log(formData)
+//         toast('Message Sent !', ToasterStatus.SUCCESS)
+//     }
+// })
 
 
 // message textarea auto-resize

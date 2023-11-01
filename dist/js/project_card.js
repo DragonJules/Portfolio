@@ -18,7 +18,7 @@ export class ProjectCard {
         this.url = url;
         this.date = date;
     }
-    render() {
+    render(projectCardHtmlTemplate) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const projectCard = document.createElement('div');
@@ -32,7 +32,6 @@ export class ProjectCard {
                 projectURL = '#';
                 disabled = 'disabled';
             }
-            let projectCardHtmlTemplate = yield fetch('../../src/views/project_card.html').then(res => res.text());
             projectCardHtmlTemplate = projectCardHtmlTemplate.replacePlaceholder('name', this.name)
                 .replacePlaceholder('thumbnail_src', this.thumbnail_src)
                 .replacePlaceholder('description', this.description)

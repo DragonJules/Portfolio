@@ -18,7 +18,7 @@ export class ProjectCard {
         this.date = date;
     }
 
-    async render(): Promise<HTMLDivElement> { 
+    async render(projectCardHtmlTemplate: string): Promise<HTMLDivElement> { 
         const projectCard = document.createElement('div')
         projectCard.classList.add('project-card')
         projectCard.classList.add('glass')
@@ -31,8 +31,6 @@ export class ProjectCard {
             projectURL = '#'
             disabled = 'disabled'
         }
-
-        let projectCardHtmlTemplate = await fetch('../../src/views/project_card.html').then(res => res.text())
 
         projectCardHtmlTemplate = projectCardHtmlTemplate.replacePlaceholder('name', this.name)
             .replacePlaceholder('thumbnail_src', this.thumbnail_src)

@@ -470,7 +470,6 @@ body:hover > .trailer {
   top: 0;
   left: 0;
   border-radius: 999px;
-  animation: float 30s infinite linear;
   filter: blur(150px);
   scale: 1.2;
 }
