@@ -109,8 +109,9 @@ body:hover > .trailer {
 		left: 0;
 		border-radius: 999px;
         
-        // animation: float 30s infinite linear;
-        filter: blur(150px);
+        // animation: float 60s infinite linear;
+        // filter: blur(150px);
+        filter: none !important;
 
         scale: 1.2;
 	}
@@ -129,7 +130,7 @@ body:hover > .trailer {
         
 		width: 24%;
 		background-color: hsl(249, 57%, 35%);
-        animation-delay: -3s;
+        animation-delay: -15s;
 	}
     
 	:nth-child(3) {
@@ -138,7 +139,7 @@ body:hover > .trailer {
         
 		width: 25%;
 		background-color: #1c3097;
-        animation-delay: -7s;
+        animation-delay: -30s;
 	}
 
 	:nth-child(4) {
@@ -147,7 +148,7 @@ body:hover > .trailer {
         
 		width: 38%;
 		background-color: hsl(258, 70%, 35%);
-        animation-delay: -9s;
+        animation-delay: -45s;
 	}
 
 
@@ -160,8 +161,8 @@ body:hover > .trailer {
         height: 100%;
         z-index: 1;
 
-        filter: url(#noiseFilter)
-            brightness(0);
+        // filter: url(#noiseFilter)
+        //     brightness(0);
         opacity: .7;
         mix-blend-mode: soft-light;
     }
@@ -170,15 +171,15 @@ body:hover > .trailer {
 @keyframes float {
     0%, 100% {
         transform: translate(0, 0)
-            scale(1);
+            scale(1.4);
     }
     25% {
         transform: translate(30%, 30%)
-            scale(1.4);
+            scale(1);
     }
     50% {
         transform: translate(50%, 0)
-            scale(1);
+            scale(1.5);
     }
     75% {
         transform: translate(-30%, -30%)
