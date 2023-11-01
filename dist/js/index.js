@@ -42,14 +42,14 @@ scrollToSectionButton.forEach(button => {
     });
 });
 // projects adding to dom
-const PROJECTS_DATABASE_PATH = '../../assets/data/projects.json';
+const PROJECTS_DATABASE_PATH = '../assets/data/projects.json';
 const projectsWrapper = document.querySelector('.projects__wrapper');
 const projectCardElementList = [];
 const projectCards = [];
 loadProjects();
 function loadProjects() {
     return __awaiter(this, void 0, void 0, function* () {
-        const projectCardHtmlTemplate = yield fetch('../../views/project_card.html').then(res => res.text());
+        const projectCardHtmlTemplate = yield fetch('../views/project_card.html').then(res => res.text());
         let rawProjectsData = yield fetch(PROJECTS_DATABASE_PATH).then(res => res.text());
         let projectsData = JSON.parse(rawProjectsData);
         let projectsList = projectsData.projects;
