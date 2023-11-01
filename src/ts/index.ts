@@ -39,7 +39,7 @@ scrollToSectionButton.forEach(button => {
 })
 
 // projects adding to dom
-const PROJECTS_DATABASE_PATH = 'https://dragonjules.github.io/Portfolio/assets/data/projects.json'
+const PROJECTS_DATABASE_PATH = 'assets/data/projects.json'
 
 const projectsWrapper = document.querySelector('.projects__wrapper')
 const projectCardElementList: HTMLElement[] = []
@@ -51,7 +51,7 @@ loadProjects()
 
 
 async function loadProjects () {
-    const projectCardHtmlTemplate = await fetch('https://dragonjules.github.io/Portfolio/views/project_card.html').then(res => res.text())
+    const projectCardHtmlTemplate = await fetch('Portfolio/views/project_card.html').then(res => res.text())
 
     let rawProjectsData = await fetch(PROJECTS_DATABASE_PATH).then(res => res.text())
     let projectsData = JSON.parse(rawProjectsData)
