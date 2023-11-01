@@ -1,0 +1,370 @@
+@use './variables';
+@use 'sass:meta';
+
+
+@font-face {
+    font-family: Quicksand;
+    src: url(../../assets/fonts/Quicksand-VariableFont_wght.ttf);
+}
+
+
+*,
+*::before,
+*::after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+
+    &:not(i) {
+        font-family: Quicksand, Arial, Helvetica, sans-serif;
+    }
+    font-weight: 400;
+    color: $white;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: $white-lowest;
+    border-radius: 999px;
+    &:hover {
+        background: $white-low;
+    }
+}
+
+::selection {
+    color: $white;
+    background: $color-primary;
+  }
+
+
+body {
+    background-color: $background-color;
+
+    --glass-effect-display: block;
+}
+
+
+section {
+    padding: var(--padding-page); 
+    margin-bottom: var(--section-margin);
+}
+
+strong {
+    font-weight: 500;
+}
+
+%glass-color {
+    border: 1px solid $white-highlow;
+    background-color: $white-lowest;
+}
+
+.glass {
+    border-radius: var(--border-radius-highest);
+    padding: var(--padding-highest);
+
+    @extend %glass-color;
+}
+
+.glass-header {
+    @extend %glass-color;
+
+    border-radius: var(--border-radius-highest);
+    padding: var(--padding-mid) var(--padding-highest);
+    margin-bottom: var(--padding-mid);
+}
+
+.glass, .glass-header {
+    position: relative;
+
+    &::before {
+        display: var(--glass-effect-display);
+
+        content: '';
+        border-radius: inherit;
+    
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+
+        pointer-events: none;
+
+        opacity: 0;
+        z-index: -1;
+
+        transition: opacity .5s ease;
+
+        background: radial-gradient(
+            800px circle at var(--mouse-x) var(--mouse-y), 
+            rgba($color: $white, $alpha: 0.05),
+            transparent 40%
+        );
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        border-radius: inherit;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        box-shadow: 0 0 15px rgba($color: $white, $alpha: 0.1);
+        opacity: 0;
+        transition: opacity 500ms ease;
+        pointer-events: none;
+    }
+
+    &:hover {
+        &::before, &::after {
+            opacity: 1;
+        }
+    }
+}
+
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    &:not(.no-style-button) {
+        display: flex;
+        align-items: center;
+        gap: var(--default-margin);
+    
+        background-color: $white-highlow;
+        border: 1px solid $white-mid;
+        border-radius: var(--border-radius-mid);
+    
+        padding: var(--padding-button);
+    
+        transition-timing-function: ease-in-out;
+        
+        transition: background-color .2s, border-color 2s, box-shadow .5s;
+
+
+        img {
+            height: 1em;
+        }
+    
+        &:hover {
+            background-color: $white-mid;
+            border-color: $white;
+        }
+        
+        &:disabled {
+            background-color: $white-low;
+            border-color: $white-highlow;
+            color: $white-highlow;
+    
+            cursor: not-allowed;
+            pointer-events: none;
+    
+            img {
+                opacity: .25;
+            }
+        }
+    
+        &:active {
+            box-shadow: 0 0 1em $white-highlow;
+        }
+    }
+}
+
+.tag {
+    background-color: $white-highlow;
+    border: 1px solid $white-mid;
+    border-radius: var(--border-radius-mid);
+
+    padding: var(--padding-tag);
+
+    text-align: center;
+}
+
+
+
+h1 {
+    font-size: 2.3rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+
+@media screen and (min-width: 700px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    p {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+    }
+    
+    p {
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (min-width: 4000px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+    
+    h2 {
+        font-size: 2.5rem;
+    }
+    
+    h3 {
+        font-size: 2rem;
+    }
+    
+    p {
+        font-size: 1.5rem;
+    }
+}
+
+
+
+
+*:focus {
+    outline: 1px solid $white-mid;
+}
+
+a:hover {
+    opacity: .8;
+}
+
+
+
+.changing-text {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    color: transparent;
+
+    &::after {
+        content: attr(data-current-text);
+        
+        display: inline;
+        position: absolute;
+        inset: 0;
+        transition: transform .2s ease-in-out;
+    }
+    &.text-disappeared::after {
+        transform: translateY(100%);
+    }
+}   
+
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateX(calc(-2 * var(--default-margin)));
+
+    transition: opacity, transform;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+
+
+    &.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .scroll-reveal {
+        transition: none;
+    }
+}
+
+
+.sort-icon {
+    height: 2em;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    span {
+        pointer-events: none;
+        background-color: $white;
+
+        position: absolute;
+
+        height: 1px;
+
+        transition: transform 300ms ease;
+
+        &:nth-child(1) {
+            width: 100%;
+
+            transform: translateY(-0.7em);
+        }
+        &:nth-child(2) {
+            width: 70%; 
+            transition: opacity 300ms 100ms ease;
+
+        }
+        &:nth-child(3) {
+            width: 40%;
+
+            transform: translateY(0.7em);
+            transition: transform 300ms ease, width 300ms ease;;
+        }
+    }
+
+    &.close span {
+        &:nth-child(1) {
+            transform: translateY(0) rotate(45deg);
+        }
+        &:nth-child(2) {
+            opacity: 0;
+            transition: opacity 100ms 0ms ease;
+        }
+        &:nth-child(3) {
+            width: 100%;
+            transform: translateY(0) rotate(-45deg);
+        }
+    }
+}

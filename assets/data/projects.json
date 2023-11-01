@@ -1,0 +1,52 @@
+{
+    "projects": [
+        {
+            "name":"Binary Code", 
+            "tags": ["Finished", "Public"],
+            "thumbnail_src": "https://i.ibb.co/s1Jw1Xs/image-2023-11-01-012101341.png", 
+            "description": "Binary Code is a slideshow I made for a school presentation. It's made with SCSS and TypeScript. It includes nice animations, cool visuals, is'nt really responsive and was made only for this presentation.", 
+            "url": "https://dragonjules.github.io/Binary-Code/",
+            "date": "Oct 7, 2023"
+        },
+        {
+            "name":"Transposition", 
+            "tags": ["Private", "In Progress"],
+            "thumbnail_src": "https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+            "description": "This project, developed in Python, aims at creating an application capable of scanning musical scores from a photo and reading them, via Optical Music Recongnition, in order to transpose them so that they can be played by several instruments.", 
+            "url": "",
+            "date": "Aug 17, 2023"
+        },
+        {
+            "name":"Shop Bot", 
+            "tags": ["Finished", "Public"],
+            "thumbnail_src": "https://images.unsplash.com/photo-1614680376739-414d95ff43df?auto=format&fit=crop&q=80&w=3200&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+            "description": "This open source, self-hosted, Discord bot developed in JavaScript, with the latest version of Discord's API, allows anyone to create easily virtual shops and currencies on their Discord server. It uses local database with JSON, and Discord's latest functionalities for bots, in order to create the best possible experience for both adminitrators and users.", 
+            "url": "https://github.com/DragonJules/ShopBot",
+            "date": "June 2023"
+        },
+        {
+            "name":"Break Out", 
+            "tags": ["In Progress", "Public"],
+            "thumbnail_src": "https://i.ibb.co/tc5ssrJ/image-2023-11-01-013641304.png", 
+            "description": "This Break Out game is a project I developed to improve my JavaScript skills, it's pretty simple, and probably not really well made (absolutely not responsive!), but it works. I should rework it, so it has the 'In Progress' status.", 
+            "url": "https://dragonjules.github.io/BreakOut/",
+            "date": "July 2022"
+        },
+        {
+            "name":"Syntax", 
+            "tags": ["In Progress", "Public"],
+            "thumbnail_src": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=3538&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
+            "description": "Syntax is a silly project, that I developed in a few hours, and that just strings by other strings. But it has a funny application, and I want to finish it so it's easy to use.", 
+            "url": "https://github.com/DragonJules/SYNTAX/",
+            "date": "May 2022"
+        },
+        {
+            "name":"Code Editor for Syntax", 
+            "tags": ["In Progress", "Public"],
+            "thumbnail_src": "https://i.ibb.co/7NfR5Gy/image-2023-11-01-014910038.png", 
+            "description": "This small, but really annoying project, is just a textarea that colors keywords. I did that so it can be used with Syntax, in order to have a sort of complete new programming language. It's not completely finished. (it also has a gradient background that is randomly generated, because I think it's cool)", 
+            "url": "https://dragonjules.github.io/CodeEditor/",
+            "date": "Nov 27, 2022"
+        }
+    ]
+}

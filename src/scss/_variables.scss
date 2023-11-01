@@ -1,0 +1,96 @@
+// -> colors
+$background-color: #16171D;
+$color-primary: #35228a;
+
+$color-error: #e93e27;
+$color-success: #41ddbb;
+
+$white: #E8EAF6;
+
+$white-lowest: rgba($color: $white, $alpha: .075);
+$white-low: rgba($color: $white, $alpha: .12);
+$white-highlow: rgba($color: $white, $alpha: .25);
+$white-mid: rgba($color: $white, $alpha: .5);
+
+// -> measurements
+// mobile
+$border-radius-highest: 20px;
+$border-radius-mid: 20px;
+
+$padding-page: 25px;
+$padding-highest: 25px;
+$padding-mid: 20px;
+
+$padding-button: 10px 20px;
+$padding-tag: 5px 15px;
+$padding-input: 15px;
+
+$default-margin: .5em;
+
+$section-margin: 75px;
+
+// desktop
+$border-radius-highest-d: 30px;
+$border-radius-mid-d: 20px;
+
+$padding-page-d: 40px;
+$padding-highest-d: 40px;
+$padding-mid-d: 22px;
+
+$padding-button-d: 10px 30px;
+$padding-tag-d: 5px 15px;
+$padding-input-d: 15px;
+
+$default-margin-d: .5em;
+
+$section-margin-d: 100px;
+
+
+html {
+    --border-radius-highest: #{$border-radius-highest};
+    --border-radius-mid: #{$border-radius-mid};
+    --padding-page: #{$padding-page};
+    --padding-highest: #{$padding-highest};
+    --padding-mid: #{$padding-mid};
+    --padding-button: #{$padding-button};
+    --padding-tag: #{$padding-tag};
+    --padding-input: #{$padding-input};
+    --default-margin: #{$default-margin};
+    --section-margin: #{$section-margin};
+}
+
+@media screen and (min-width: 900px) and (orientation: landscape) {
+    html {
+        --border-radius-highest: #{$border-radius-highest-d};
+        --border-radius-mid: #{$border-radius-mid-d};
+        --padding-page: #{$padding-page-d};
+        --padding-highest: #{$padding-highest-d};
+        --padding-mid: #{$padding-mid-d};
+        --padding-button: #{$padding-button-d};
+        --padding-tag: #{$padding-tag-d};
+        --padding-input: #{$padding-input-d};
+        --default-margin: #{$default-margin-d};
+        --section-margin: #{$section-margin-d};
+    }
+}
+
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+    html {
+        --section-margin: calc(#{$section-margin-d} * 1.5);
+    }
+}
+
+
+@media screen and (min-width: 1400px) and (orientation: landscape) {
+    html {
+        --padding-page: calc(#{$padding-page-d} * 2);
+        --section-margin: calc(#{$section-margin-d} * 2.5);
+    }
+}
+
+
+@media screen and (min-width: 2000px) and (orientation: landscape) {
+    html {
+        --padding-page: calc(#{$padding-page-d} * 2.5);
+    }
+}

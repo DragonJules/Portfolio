@@ -3,14 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/77948c1566.js" crossorigin="anonymous"></script>
     
-    <script src="dist/js/index.js" defer></script>
+    <script src="dist/js/index.js" defer type="module"></script>
     <link rel="stylesheet" href="dist/css/style.css">
 
     <title>Portfolio</title>
 
 </head>
 <body>
-    
+    <svg viewBox="0 0 200 200" xmlns='http://www.w3.org/2000/svg' style="display: none;">
+        <filter id='noiseFilter'>
+            <feTurbulence 
+            type='fractalNoise' 
+            baseFrequency='0.65' 
+            numOctaves='1'
+            stitchTiles='stitch'/>
+            <feColorMatrix type="saturate" values="0" />
+        </filter>
+    <rect
+        width='100%' 
+        height='100%' 
+        filter='url(#noiseFilter)' />
+    </svg>
+
+    <div id="toaster" class="error">
+        <p>Toast</p>
+    </div>
+
+    <div class="trailer">
+        <img src="assets/images/arrow-ext.svg" alt="trailer icon" class="trailer-icon">
+    </div>
+
+    <div class="background">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <section class="hero">
+        <div class="container glass scroll-reveal">
+            <h1 class="changing-text-parent">Hi, I'm <strong class="changing-text" data-text-variations="a student;a developer" data-current-text="Jules">Jules</strong></h1>
+            <button data-section-index="1" class="no-style-button scroll-to-section-button interactable" data-interactable-type="scroll">
+                <img src="assets/images/scroll-cta.svg" alt="arrow scroll">
+            </button>
+        </div>
+    </section>
+    <section class="home">
+        <div class="home__header glass-header scroll-reveal">
+            <h2><strong>About</strong> me</h2>
+        </div>
+        <div class="home__wrapper">
+            <article class="glass scroll-reveal" style="transition-delay: 200ms;">
+                <h2>My <strong>Background</strong></h2>
+                <p>My name is Jules, I'm 17 and I'm currently in high school. I've been passionate about development since the age of 9. After discovering block programming with Scratch, I learned how to use Arduino, and that was really my gateway into the wonderful world of development. I then set out to learn everything, starting with the creation of a discord bot, which led me to discover Node JS, which I still love today. Then I got into front-end development, learned Python, Java, Kotlin and every time I need to learn a new technology, I do it.<br><br> Apart from development, I play the clarinet, go climbing, enjoy woodworking and electronics. I have a Brevet d'Initiation à l'Aeronautique and am interested in aerospace. I'm also interested in cinema and video production, as well as UI/UX design.</p>
+            </article>
+            <article class="glass scroll-reveal" style="transition-delay: 400ms;">
+                <h2>Now and <strong>Later</strong></h2>
+                <p>I'm currently working on some extraordinary projects and preparing to enter a preparatory school, with a view to joining the Isae Supaero engineering school.
+                    Indeed, I'd like to be an embedded systems engineer in the aerospace field.</p>
+            </article>
+        </div>
+    </section>
+    <section class="projects">
+        <div class="projects__header glass-header scroll-reveal">
+            <h2>My <strong>Projects</strong></h2>
+            <div class="projects__sort">
+                <button class="projects__sort--sort-button no-style-button">
+                    <div class="sort-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+
+                <dialog class="projects__sort--tags-selector-dialog glass">
+                    <div class="projects__sort--tag-list-wrapper"></div>
+                </dialog>
+            </div>
+        </div>
+        <div class="projects__wrapper">
+            
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="contact__header glass-header scroll-reveal" >
+            <h2><strong>Contact</strong> me</h2>
+        </div>
+        <div class="contact__wrapper">
+            <div class="contact__form-container glass scroll-reveal" style="transition-delay: 200ms;">
+                <form action="" >
+                    <div class="input-field">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" required placeholder="Name" data-field-invalid-message="Required">
+                    </div>
+                    <div class="input-field">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" required placeholder="Email" data-field-invalid-message="Email is invalid" data-regexp="^[-!#$%&'*+/0-9=?A-Z\\^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z\^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$">
+                    </div>
+                    <div class="input-field">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" required placeholder="Message" data-field-invalid-message="Required"></textarea>
+                    </div>
+                </form>
+                <button class="contact__submit-button interactable" data-interactable-type="default">
+                    Send Message
+                    <img src="assets/images/arrow-right.svg" alt="arrow">
+                </button>
+            </div>
+            <div class="contact__socials glass scroll-reveal" style="transition-delay: 400ms;">
+                <h3>My <strong>Socials</strong></h3>
+                <a href="mailto:itzdragon.contact@gmail.com" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                    <div class="icon"><i class="fa-regular fa-envelope"></i></div>Email
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                    <div class="icon"><i class="fa-brands fa-linkedin"></i></div>Linkedin
+                </a>
+                <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                    <div class="icon"><i class="fa-brands fa-discord"></i></div>Discord
+                </a>
+                <a href="https://github.com/DragonJules" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                    <div class="icon"><i class="fa-brands fa-github"></i></div>Github
+                </a>
+                
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>

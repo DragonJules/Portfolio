@@ -217,25 +217,20 @@ messageTextarea.addEventListener('keyup', () => {
 // projects sorting with tags
 const sortButton = document.querySelector('.projects__sort--sort-button');
 const tagsSelectorDialog = document.querySelector('.projects__sort--tags-selector-dialog');
-const tagsWrapper = tagsSelectorDialog.querySelector('.projects__sort--tag-list-wrapper');
-let selectedTags = [];
+const selectedTags = [];
 sortButton.onclick = () => {
-    var _a, _b;
     if (tagsSelectorDialog.open) {
         tagsSelectorDialog.close();
-        (_a = sortButton.querySelector('.sort-icon')) === null || _a === void 0 ? void 0 : _a.classList.remove('close');
-        selectedTags = [];
-        updateShownProjectCards();
-        tagsWrapper.childNodes.forEach(tagElement => tagElement.classList.remove('selected'));
     }
     else {
+        console.log('bruh');
         tagsSelectorDialog.show();
-        (_b = sortButton.querySelector('.sort-icon')) === null || _b === void 0 ? void 0 : _b.classList.add('close');
     }
 };
 function populateTagsSelectorDialog(tagsList) {
+    const tagsWrapper = tagsSelectorDialog.querySelector('.projects__sort--tag-list-wrapper');
     tagsList.map(tag => {
-        const tagElement = document.createElement('button');
+        const tagElement = document.createElement('span');
         tagElement.classList.add('tag');
         tagElement.innerText = tag;
         tagsWrapper.appendChild(tagElement);
@@ -254,7 +249,6 @@ function populateTagsSelectorDialog(tagsList) {
 function updateShownProjectCards() {
     projectCardElementList.forEach((projectCardElement, index) => {
         const projectCardTags = projectCards[index].tags;
-        const selectedProjectCardTags = projectCardTags.filter(tag => selectedTags.includes(tag));
-        projectCardElement.classList.toggle('shown', selectedProjectCardTags.length >= selectedTags.length);
+        projectCardElement.classList.toggle('shown', projectCardTags.includes('selected'));
     });
 }
