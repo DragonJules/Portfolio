@@ -49,3 +49,6 @@ exclude:
   - tsconfig.json
 
 
+include:
+  - assets/data/
+  - views/
