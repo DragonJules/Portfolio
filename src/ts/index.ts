@@ -22,8 +22,10 @@ const sections = document.querySelectorAll('section')
 
 function scrollToSection(sectionIndex: number) {
     if (0 <= sectionIndex && sectionIndex < sections.length) {
+        const top = sections[sectionIndex].offsetTop - (+getComputedStyle(document.querySelector('section')!).marginBottom.match(/\d+/)![0] / 2);
+
         window.scrollTo({
-            top: sections[sectionIndex].offsetTop,
+            top: top,
             behavior: 'smooth'
         })
     }
@@ -118,6 +120,8 @@ const getTrailerIconSrc = (interactableType: string) => {
             return 'assets/images/scroll-cta.svg';
         case 'ext':
             return 'assets/images/arrow-ext.svg';
+        case 'filter':
+            return 'assets/images/filter.svg';
         default:
             return 'assets/images/arrow-right.svg'; 
     }

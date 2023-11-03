@@ -15,6 +15,9 @@
     <link rel="preload" href="dist/css/style.css" as="style">
 
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+
 </head>
 <body>
     <svg viewBox="0 0 200 200" xmlns='http://www.w3.org/2000/svg' style="display: none;">
@@ -137,11 +140,11 @@
                 <form action="" >
                     <div class="input-field">
                         <label for="name">Name</label>
-                        <input type="text" name="name" id="name" required placeholder="Name" data-field-invalid-message="Required">
+                        <input type="text" name="name" id="name" autocomplete="name" required placeholder="Name" data-field-invalid-message="Required">
                     </div>
                     <div class="input-field">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="email" required placeholder="Email" data-field-invalid-message="Email is invalid" data-regexp="^[-!#$%&'*+/0-9=?A-Z\\^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z\^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$">
+                        <input type="email" name="email" id="email" autocomplete="email" required placeholder="Email" data-field-invalid-message="Email is invalid" data-regexp="^[-!#$%&'*+/0-9=?A-Z\\^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z\^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$">
                     </div>
                     <div class="input-field">
                         <label for="message">Message</label>

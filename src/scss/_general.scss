@@ -3,8 +3,8 @@
 
 
 @font-face {
-    font-family: Quicksand;
-    src: url(../../assets/fonts/Quicksand-VariableFont_wght.ttf);
+    font-family: 'Quicksand';
+    src: url('../../assets/fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
 }
 
 
@@ -15,10 +15,7 @@
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
-
-    &:not(i) {
-        font-family: Quicksand, Arial, Helvetica, sans-serif;
-    }
+    
     font-weight: 400;
     color: $white;
 }
@@ -40,13 +37,18 @@
 ::selection {
     color: $white;
     background: $color-primary;
-  }
+}
 
 
 body {
     background-color: $background-color;
 
     --glass-effect-display: block;
+
+    &, button {
+        font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+    }
+
 }
 
 
@@ -287,6 +289,7 @@ a:hover {
     vertical-align: top;
     position: relative;
     color: transparent;
+    user-select: none;
 
     text-shadow: none;
 

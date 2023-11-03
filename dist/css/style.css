@@ -85,8 +85,8 @@ html {
   }
 }
 @font-face {
-  font-family: Quicksand;
-  src: url(../../assets/fonts/Quicksand-VariableFont_wght.ttf);
+  font-family: "Quicksand";
+  src: url("../../assets/fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
 }
 *,
 *::before,
@@ -97,11 +97,6 @@ html {
   margin: 0;
   font-weight: 400;
   color: #E8EAF6;
-}
-*:not(i),
-*::before:not(i),
-*::after:not(i) {
-  font-family: Quicksand, Arial, Helvetica, sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -128,6 +123,9 @@ html {
 body {
   background-color: #16171D;
   --glass-effect-display: block;
+}
+body, body button {
+  font-family: "Quicksand", Arial, Helvetica, sans-serif;
 }
 
 section {
@@ -311,6 +309,7 @@ a:hover {
   vertical-align: top;
   position: relative;
   color: transparent;
+  user-select: none;
   text-shadow: none;
 }
 .changing-text::after {
