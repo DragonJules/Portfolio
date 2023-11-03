@@ -102,54 +102,11 @@ body:hover > .trailer {
     overflow: hidden;
     z-index: -1;
 
-    div {
-		aspect-ratio: 1 / 1;
-		position: absolute;
-		top: 0;
-		left: 0;
-		border-radius: 999px;
-        
-        // animation: float 60s infinite linear;
-        // filter: blur(150px);
-        filter: none !important;
 
-        scale: 1.2;
-	}
-
-    :nth-child(1) {
-		top: 50%;
-		left: 70%;
-		width: 30%;
-		background-color: hsl(233, 74%, 35%);
-        animation-delay: 0s;
-	}
-    
-	:nth-child(2) {
-        top: 10%;
-		left: 60%;
-        
-		width: 24%;
-		background-color: hsl(249, 57%, 35%);
-        animation-delay: -15s;
-	}
-    
-	:nth-child(3) {
-        top: 75%;
-		left: 30%;
-        
-		width: 25%;
-		background-color: #1c3097;
-        animation-delay: -30s;
-	}
-
-	:nth-child(4) {
-		top: 5%;
-		left: 7%;
-        
-		width: 38%;
-		background-color: hsl(258, 70%, 35%);
-        animation-delay: -45s;
-	}
+    background: radial-gradient(80vw circle at 60% 80%, hsl(249, 57%, 35%), transparent 100%),
+        radial-gradient(48vw circle at 10% 60%, hsl(233, 74%, 35%), transparent 100%),
+        radial-gradient(50vw circle at 75% 30%, #1c3097, transparent 100%),
+        radial-gradient(76vw circle at 5% 7%, hsl(258, 70%, 35%), transparent 100%);
 
 
     &::after {
@@ -161,29 +118,11 @@ body:hover > .trailer {
         height: 100%;
         z-index: 1;
 
-        // filter: url(#noiseFilter)
-        //     brightness(0);
+        filter: url(#noiseFilter)
+            brightness(0);
+        
         opacity: .7;
         mix-blend-mode: soft-light;
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translate(0, 0)
-            scale(1.4);
-    }
-    25% {
-        transform: translate(30%, 30%)
-            scale(1);
-    }
-    50% {
-        transform: translate(50%, 0)
-            scale(1.5);
-    }
-    75% {
-        transform: translate(-30%, -30%)
-            scale(.7);
     }
 }
 
@@ -207,14 +146,6 @@ body:hover > .trailer {
             transition: opacity 1.5s ease;
             transition-delay: 1150ms;
         }
-
-        // h1 {
-        //     text-align: left;
-        //     position: absolute;
-        //     top: 50%;
-        //     left: 50%;
-        //     transform: translate(-50%, -50%);
-        // }
 
         button {
             border-radius: var(--border-radius-mid);
@@ -274,6 +205,27 @@ body:hover > .trailer {
 
         h2 {
             margin-bottom: var(--default-margin);
+        }
+    }
+
+    .tech-i-use {
+        ul {
+            list-style: none;
+
+            display: flex;
+            flex-direction: column;
+            gap: var(--padding-mid);
+
+            .others {
+                list-style: none;
+
+                display: flex;
+                flex-direction: row;
+                gap: var(--padding-mid);
+            }
+        }
+        h4 {
+            font-weight: 500;
         }
     }
 }
@@ -404,12 +356,19 @@ body:hover > .trailer {
 
     .contact__form-container {
         flex: 1 0 auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding-mid);
+
         form {
             display: flex;
             flex-direction: column;
             gap: var(--padding-mid);
-    
-            margin-bottom: var(--padding-mid);
+        }
+
+        button {
+            width: fit-content;
         }
     }
 
@@ -507,15 +466,21 @@ body:hover > .trailer {
     .contact__socials {
         flex: 0 1 auto;
 
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        gap: var(--padding-highest);
-
-        flex-wrap: wrap;
 
         h3 {
             width: 100%;
+            margin-bottom: var(--padding-highest);
+        }
+
+        ul {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            gap: var(--padding-highest);
+    
+            flex-wrap: wrap;
+
+            list-style: none;
         }
 
         a {
@@ -542,28 +507,19 @@ body:hover > .trailer {
 
 
 @media screen and (max-width: 400px) {
-    .background {
-        div {
-            filter: blur(75px);
-            scale: 2;
-        }
-    }
     .home .home__wrapper {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, 1fr);
     }
     
     .projects .projects__wrapper {
         --column-width: 200px;
+
+        .project-card .project-card__footer .date {
+            font-size: .8em;
+        }
     }
 }
 @media screen and (max-width: 560px) {
-    .background {
-        div {
-            filter: blur(100px);
-            scale: 1.5;
-        }
-    }
-    
     .home .home__wrapper {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
@@ -609,35 +565,36 @@ body:hover > .trailer {
 
 
 @media screen and (min-width: 700px) and (orientation: landscape) {
-    .background {
-        div {
-            filter: blur(200px);
-        }
-    }
-    
+
     .contact{ 
         .contact__wrapper {
             flex-direction: row;
         }
         .contact__socials {
-            flex-direction: column;
-            align-items: start;
-            
-            a {
-                width: 100%;
-                margin: 0 .5em;
+            ul {
+                flex-direction: column;
+                align-items: start;
+                
+                a {
+                    width: 100%;
+                    margin: 0 .5em;
+                }
             }
+
         }
     }
 }
 
-@media screen and (min-width: 1400px) and (orientation: landscape) {
+@media screen and (min-width: 1000px) {
     .background {
-        div {
-            scale: 1.5;
-        }
+        background: radial-gradient(40vw circle at 50% 70%, hsl(249, 57%, 35%), transparent 100%),
+        radial-gradient(34vw circle at 10% 60%, hsl(233, 74%, 35%), transparent 100%),
+        radial-gradient(35vw circle at 75% 30%, #1c3097, transparent 100%),
+        radial-gradient(48vw circle at 5% 7%, hsl(258, 70%, 35%), transparent 100%);
     }
+}
 
+@media screen and (min-width: 1400px) and (orientation: landscape) {
     .projects .projects__wrapper {
         --column-width: 800px;
 

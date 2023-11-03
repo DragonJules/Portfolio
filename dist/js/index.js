@@ -7,6 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { wait } from './utils.js';
 import { ProjectCard } from './project_card.js';
 import { toast, ToasterStatus } from './toaster.js';
 // open link buttons
@@ -61,7 +62,7 @@ function loadProjects() {
             projectsWrapper === null || projectsWrapper === void 0 ? void 0 : projectsWrapper.appendChild(projectCardElement);
             bindOpenLinkButton(projectCardElement.querySelector('button.project-card__link-to-project'));
             projectCardElement.style.transitionDelay = `${(index + 1) * 200}ms`;
-            observer.observe(projectCardElement);
+            scrollAnimationObserver.observe(projectCardElement);
             projectCardElementList.push(projectCardElement);
         }));
         const projectsTagsLists = projectCards.map(projectCard => projectCard.tags);
@@ -81,7 +82,7 @@ const animateTrailer = (e, interacting) => {
         transform: `translate(${x}px, ${y}px) scale(${interacting ? 3 : 1})`
     };
     trailer.animate(keyframes, {
-        duration: 800,
+        duration: 600,
         fill: 'forwards'
     });
 };
@@ -98,7 +99,7 @@ const getTrailerIconSrc = (interactableType) => {
 window.addEventListener('mousemove', (e) => {
     if (isDeviceTouch)
         return;
-    const interactable = null; //(e.target as HTMLElement).closest('.interactable')
+    const interactable = e.target.closest('.interactable');
     let interacting = interactable !== null;
     const icon = document.querySelector('.trailer-icon');
     animateTrailer(e, interacting);
@@ -108,21 +109,40 @@ window.addEventListener('mousemove', (e) => {
     }
 });
 // changing text animation
+const changingTextElAnimObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.remove('hidden');
+        }
+        else {
+            entry.target.classList.add('hidden');
+        }
+    });
+});
 const changingTextElements = document.querySelectorAll('.changing-text');
 changingTextElements.forEach(element => {
     const textVariations = [element.innerText].concat(element.getAttribute('data-text-variations').split(';'));
     let currentTextIndex = 0;
-    setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
-        // currentTextIndex = (currentTextIndex + 1) % textVariations.length
-        // element.classList.add('text-disappeared')
-        // await wait(200)
-        // element.dataset.currentText = textVariations[currentTextIndex]
-        // element.classList.remove('text-disappeared')
-        // await wait(200)
-    }), 1500);
+    let intervalID = setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
+        if (element.classList.contains('hidden'))
+            return;
+        currentTextIndex = (currentTextIndex + 1) % textVariations.length;
+        element.classList.add('text-disappearing');
+        yield wait(400);
+        element.classList.add('text-disappeared');
+        element.classList.remove('text-disappearing');
+        element.dataset.currentText = textVariations[currentTextIndex];
+        yield wait(50);
+        element.classList.remove('text-disappeared');
+        yield wait(400);
+    }), 3000);
+    if (window.matchMedia('(prefers-reduced-motion').matches) {
+        clearInterval(intervalID);
+    }
+    changingTextElAnimObserver.observe(element);
 });
 // scroll animations
-const observer = new IntersectionObserver((entries) => {
+const scrollAnimationObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
             entry.target.classList.add('show');
@@ -130,7 +150,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 });
 const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
-scrollRevealElements.forEach((el) => observer.observe(el));
+scrollRevealElements.forEach((el) => scrollAnimationObserver.observe(el));
 // form validation
 const inputFieldsElements = [...document.querySelectorAll('.input-field')];
 const labels = inputFieldsElements.map((element) => element.querySelector('label'));

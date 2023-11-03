@@ -191,19 +191,19 @@ button {
 
 
 h1 {
-    font-size: 2.3rem;
+    font-size: 2.1rem;
 }
 
 h2 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
 }
 
 h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
 }
 
 p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 
@@ -237,6 +237,10 @@ p {
     h3 {
         font-size: 1.5rem;
     }
+
+    h4 {
+        font-size: 1.30rem;
+    }
     
     p {
         font-size: 1.2rem;
@@ -254,6 +258,10 @@ p {
     
     h3 {
         font-size: 2rem;
+    }
+
+    h4 {
+        font-size: 1.55rem;
     }
     
     p {
@@ -280,16 +288,31 @@ a:hover {
     position: relative;
     color: transparent;
 
+    text-shadow: none;
+
     &::after {
         content: attr(data-current-text);
+        text-shadow: 0 0 .5em $white;
         
         display: inline;
         position: absolute;
-        inset: 0;
-        transition: transform .2s ease-in-out;
+        top: 0;
+        left: 0;
+        width: max-content;
+
+        transform: translateY(0);
+        opacity: 1;
+
+        transition: transform .4s ease-in-out, opacity .2s ease-in-out;
+    }
+    &.text-disappearing::after {
+        opacity: 0;
+        transform: translateY(30%);
     }
     &.text-disappeared::after {
-        transform: translateY(100%);
+        opacity: 0;
+        transform: translateY(-30%);
+        transition: none;
     }
 }   
 

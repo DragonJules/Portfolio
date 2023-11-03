@@ -76,7 +76,7 @@ async function loadProjects () {
         bindOpenLinkButton(projectCardElement.querySelector('button.project-card__link-to-project')!)
 
         projectCardElement.style.transitionDelay = `${(index + 1) * 200}ms`
-        observer.observe(projectCardElement)
+        scrollAnimationObserver.observe(projectCardElement)
 
         projectCardElementList.push(projectCardElement)
     })
@@ -107,7 +107,7 @@ const animateTrailer = (e: MouseEvent, interacting: Boolean) => {
     }
     
     trailer.animate(keyframes, { 
-        duration: 800, 
+        duration: 600, 
         fill: 'forwards' 
     });
 }
@@ -126,7 +126,7 @@ const getTrailerIconSrc = (interactableType: string) => {
 window.addEventListener('mousemove', (e: MouseEvent) => { 
     if (isDeviceTouch) return
 
-    const interactable: HTMLElement | null = null //(e.target as HTMLElement).closest('.interactable')
+    const interactable: HTMLElement | null = (e.target as HTMLElement).closest('.interactable')
     let interacting = interactable !== null;
 
     const icon = document.querySelector('.trailer-icon') as HTMLImageElement
@@ -140,29 +140,48 @@ window.addEventListener('mousemove', (e: MouseEvent) => {
 })
 
 // changing text animation
+const changingTextElAnimObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.remove('hidden')
+        } else {
+            entry.target.classList.add('hidden')
+        }
+    })
+})
+
 const changingTextElements = document.querySelectorAll('.changing-text') as NodeListOf<HTMLElement>
 
 changingTextElements.forEach(element => {
     const textVariations = [element.innerText].concat(element.getAttribute('data-text-variations')!.split(';'))
 
     let currentTextIndex = 0
-    setInterval(async () => {
-        // currentTextIndex = (currentTextIndex + 1) % textVariations.length
+    let intervalID = setInterval(async () => {
+        if (element.classList.contains('hidden')) return
+        currentTextIndex = (currentTextIndex + 1) % textVariations.length
 
-        // element.classList.add('text-disappeared')
-        // await wait(200)
+        element.classList.add('text-disappearing')
+        await wait(400)
+        element.classList.add('text-disappeared')
+        element.classList.remove('text-disappearing')
 
-        // element.dataset.currentText = textVariations[currentTextIndex]
+        element.dataset.currentText = textVariations[currentTextIndex]
 
-        // element.classList.remove('text-disappeared')
-        // await wait(200)
+        await wait(50)
+        element.classList.remove('text-disappeared')
+        await wait(400)
         
-    }, 1500)
+    }, 3000)
 
+    if (window.matchMedia('(prefers-reduced-motion').matches) {
+        clearInterval(intervalID)
+    }
+
+    changingTextElAnimObserver.observe(element)
 })
 
 // scroll animations
-const observer = new IntersectionObserver((entries) => {
+const scrollAnimationObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
             entry.target.classList.add('show')
@@ -171,7 +190,7 @@ const observer = new IntersectionObserver((entries) => {
 })
 
 const scrollRevealElements = document.querySelectorAll('.scroll-reveal')
-scrollRevealElements.forEach((el) => observer.observe(el))
+scrollRevealElements.forEach((el) => scrollAnimationObserver.observe(el))
 
 
 // form validation
