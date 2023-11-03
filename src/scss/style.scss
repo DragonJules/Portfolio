@@ -2,6 +2,7 @@
 @import './general';
 
 
+// toaster
 #toaster {
     --toast-duration: 5000ms;
 
@@ -51,7 +52,7 @@
     }
 }
 
-
+// mouse trailer
 body:hover > .trailer {
     opacity: 1;
 }
@@ -93,6 +94,7 @@ body:hover > .trailer {
 
 }
 
+// background
 .background {
     position: fixed;
     top: 0;
@@ -126,6 +128,7 @@ body:hover > .trailer {
     }
 }
 
+// hero
 .hero {
     height: 100svh;
     .container {
@@ -194,6 +197,7 @@ body:hover > .trailer {
     }
 }
 
+// home
 .home .home__wrapper {
     display: grid;
     gap: var(--padding-mid);
@@ -230,6 +234,7 @@ body:hover > .trailer {
     }
 }
 
+// projects
 .projects {
     .projects__header {
         display: flex;
@@ -345,7 +350,7 @@ body:hover > .trailer {
     }
 }
 
-
+// contact
 .contact {
     
     .contact__wrapper {
@@ -505,7 +510,7 @@ body:hover > .trailer {
     }
 }
 
-
+// media queries
 @media screen and (max-width: 400px) {
     .home .home__wrapper {
         grid-template-columns: repeat(auto-fit, 1fr);
@@ -604,7 +609,7 @@ body:hover > .trailer {
     }
 }
 
-
+// accessibility
 @media (prefers-reduced-motion) {
     body {
         --glass-effect-display: none;

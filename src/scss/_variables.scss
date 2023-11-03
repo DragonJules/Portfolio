@@ -74,6 +74,7 @@ html {
     }
 }
 
+
 @media screen and (min-width: 1200px) and (orientation: landscape) {
     html {
         --section-margin: calc(#{$section-margin-d} * 1.5);
@@ -93,4 +94,12 @@ html {
     html {
         --padding-page: calc(#{$padding-page-d} * 2.5);
     }
+}
+
+
+// placeholders
+
+%glass-color {
+    border: 1px solid $white-highlow;
+    background-color: $white-lowest;
 }

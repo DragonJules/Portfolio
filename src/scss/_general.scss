@@ -1,13 +1,11 @@
 @use './variables';
-@use 'sass:meta';
-
 
 @font-face {
     font-family: 'Quicksand';
     src: url('../../assets/fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
 }
 
-
+// reset
 *,
 *::before,
 *::after {
@@ -20,6 +18,7 @@
     color: $white;
 }
 
+// scrollbar and selection
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -39,7 +38,7 @@
     background: $color-primary;
 }
 
-
+// general styles
 body {
     background-color: $background-color;
 
@@ -57,14 +56,116 @@ section {
     margin-bottom: var(--section-margin);
 }
 
+
+h1 { font-size: 2.1rem }
+
+h2 { font-size: 1.7rem }
+
+h3 { font-size: 1.5rem }
+
+p { font-size: 1.1rem }
+
+
+@media screen and (min-width: 700px) {
+    h1 { font-size: 2rem }
+    
+    h2 { font-size: 1.5rem }
+    
+    h3 { font-size: 1.2rem }
+    
+    p { font-size: 1rem }
+}
+
+@media screen and (min-width: 2000px) {
+    h1 { font-size: 3rem }
+    
+    h2 { font-size: 2rem }
+    
+    h3 { font-size: 1.5rem }
+
+    h4 { font-size: 1.30rem }
+    
+    p { font-size: 1.2rem }
+}
+
+@media screen and (min-width: 4000px) {
+    h1 { font-size: 3.5rem }
+    
+    h2 { font-size: 2.5rem }
+    
+    h3 { font-size: 2rem }
+
+    h4 { font-size: 1.55rem }
+    
+    p { font-size: 1.5rem }
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    &:not(.no-style-button) {
+        display: flex;
+        align-items: center;
+        gap: var(--default-margin);
+    
+        background-color: $white-highlow;
+        border: 1px solid $white-mid;
+        border-radius: var(--border-radius-mid);
+    
+        padding: var(--padding-button);
+    
+        transition-timing-function: ease-in-out;
+        
+        transition: background-color .2s, border-color 2s, box-shadow .5s;
+
+
+        img {
+            height: 1em;
+        }
+    
+        &:hover {
+            background-color: $white-mid;
+            border-color: $white;
+        }
+        
+        &:disabled {
+            background-color: $white-low;
+            border-color: $white-highlow;
+            color: $white-highlow;
+    
+            cursor: not-allowed;
+            pointer-events: none;
+    
+            img {
+                opacity: .25;
+            }
+        }
+    
+        &:active {
+            box-shadow: 0 0 1em $white-highlow;
+        }
+    }
+}
+
+*:focus {
+    outline: 1px solid $white-mid;
+}
+
+a {
+    transition: opacity 200ms ease;
+}
+
+a:hover {
+    opacity: .8;
+}
+
+
 strong {
     font-weight: 500;
 }
 
-%glass-color {
-    border: 1px solid $white-highlow;
-    background-color: $white-lowest;
-}
 
 .glass {
     border-radius: var(--border-radius-highest);
@@ -131,55 +232,6 @@ strong {
 }
 
 
-button {
-    cursor: pointer;
-    background: none;
-    border: none;
-
-    &:not(.no-style-button) {
-        display: flex;
-        align-items: center;
-        gap: var(--default-margin);
-    
-        background-color: $white-highlow;
-        border: 1px solid $white-mid;
-        border-radius: var(--border-radius-mid);
-    
-        padding: var(--padding-button);
-    
-        transition-timing-function: ease-in-out;
-        
-        transition: background-color .2s, border-color 2s, box-shadow .5s;
-
-
-        img {
-            height: 1em;
-        }
-    
-        &:hover {
-            background-color: $white-mid;
-            border-color: $white;
-        }
-        
-        &:disabled {
-            background-color: $white-low;
-            border-color: $white-highlow;
-            color: $white-highlow;
-    
-            cursor: not-allowed;
-            pointer-events: none;
-    
-            img {
-                opacity: .25;
-            }
-        }
-    
-        &:active {
-            box-shadow: 0 0 1em $white-highlow;
-        }
-    }
-}
-
 .tag {
     background-color: $white-highlow;
     border: 1px solid $white-mid;
@@ -189,100 +241,6 @@ button {
 
     text-align: center;
 }
-
-
-
-h1 {
-    font-size: 2.1rem;
-}
-
-h2 {
-    font-size: 1.7rem;
-}
-
-h3 {
-    font-size: 1.5rem;
-}
-
-p {
-    font-size: 1.1rem;
-}
-
-
-@media screen and (min-width: 700px) {
-    h1 {
-        font-size: 2rem;
-    }
-    
-    h2 {
-        font-size: 1.5rem;
-    }
-    
-    h3 {
-        font-size: 1.2rem;
-    }
-    
-    p {
-        font-size: 1rem;
-    }
-}
-
-@media screen and (min-width: 2000px) {
-    h1 {
-        font-size: 3rem;
-    }
-    
-    h2 {
-        font-size: 2rem;
-    }
-    
-    h3 {
-        font-size: 1.5rem;
-    }
-
-    h4 {
-        font-size: 1.30rem;
-    }
-    
-    p {
-        font-size: 1.2rem;
-    }
-}
-
-@media screen and (min-width: 4000px) {
-    h1 {
-        font-size: 3.5rem;
-    }
-    
-    h2 {
-        font-size: 2.5rem;
-    }
-    
-    h3 {
-        font-size: 2rem;
-    }
-
-    h4 {
-        font-size: 1.55rem;
-    }
-    
-    p {
-        font-size: 1.5rem;
-    }
-}
-
-
-
-
-*:focus {
-    outline: 1px solid $white-mid;
-}
-
-a:hover {
-    opacity: .8;
-}
-
-
 
 .changing-text {
     display: inline-block;

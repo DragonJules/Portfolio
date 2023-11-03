@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import './utils.js';
 import './string.js';
+const projectCardClasses = ['project-card', 'glass', 'scroll-reveal', 'shown'];
 export class ProjectCard {
     constructor(name, tags, thumbnail_src, description, url, date) {
         this.name = name;
@@ -22,10 +23,7 @@ export class ProjectCard {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const projectCard = document.createElement('div');
-            projectCard.classList.add('project-card');
-            projectCard.classList.add('glass');
-            projectCard.classList.add('scroll-reveal');
-            projectCard.classList.add('shown');
+            projectCardClasses.forEach(className => projectCard.classList.add(className));
             let projectURL = this.url;
             let disabled = '';
             if (!projectURL) {

@@ -10,6 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { wait } from './utils.js';
 import { ProjectCard } from './project_card.js';
 import { toast, ToasterStatus } from './toaster.js';
+// ----------------------
+//    SETUP COMPONENTS
+// ----------------------
 // open link buttons
 function bindOpenLinkButton(button) {
     let url = button.getAttribute('data-url');
@@ -20,22 +23,24 @@ function bindOpenLinkButton(button) {
     });
 }
 const openLinkButton = document.querySelectorAll('button.open-link-button');
-openLinkButton.forEach(button => {
+openLinkButton.forEach((button) => {
     bindOpenLinkButton(button);
 });
 // scroll to section
 const sections = document.querySelectorAll('section');
 function scrollToSection(sectionIndex) {
     if (0 <= sectionIndex && sectionIndex < sections.length) {
-        const top = sections[sectionIndex].offsetTop - (+getComputedStyle(document.querySelector('section')).marginBottom.match(/\d+/)[0] / 2);
+        const top = sections[sectionIndex].offsetTop -
+            +getComputedStyle(document.querySelector('section')).marginBottom.match(/\d+/)[0] /
+                2;
         window.scrollTo({
             top: top,
-            behavior: 'smooth'
+            behavior: 'smooth',
         });
     }
 }
 const scrollToSectionButton = document.querySelectorAll('.scroll-to-section-button');
-scrollToSectionButton.forEach(button => {
+scrollToSectionButton.forEach((button) => {
     let sectionIndex = button.getAttribute('data-section-index');
     if (!sectionIndex)
         return;
@@ -44,6 +49,7 @@ scrollToSectionButton.forEach(button => {
     });
 });
 // projects adding to dom
+const SCROLL_REAVEAL_ANIMATION_DELAY = 200;
 const PROJECTS_DATABASE_PATH = 'assets/data/projects.json';
 const projectsWrapper = document.querySelector('.projects__wrapper');
 const projectCardElementList = [];
@@ -51,28 +57,32 @@ const projectCards = [];
 loadProjects();
 function loadProjects() {
     return __awaiter(this, void 0, void 0, function* () {
-        const projectCardHtmlTemplate = yield fetch('views/project_card.html').then(res => res.text());
-        let rawProjectsData = yield fetch(PROJECTS_DATABASE_PATH).then(res => res.text());
+        const projectCardHtmlTemplate = yield fetch('views/project_card.html').then((res) => res.text());
+        let rawProjectsData = yield fetch(PROJECTS_DATABASE_PATH).then((res) => res.text());
         let projectsData = JSON.parse(rawProjectsData);
         let projectsList = projectsData.projects;
-        projectsList.forEach(projectData => {
+        projectsList.forEach((projectData) => {
             projectCards.push(new ProjectCard(projectData.name, projectData.tags, projectData.thumbnail_src, projectData.description, projectData.url, projectData.date));
         });
         projectCards.forEach((projectCard, index) => __awaiter(this, void 0, void 0, function* () {
             const projectCardElement = yield projectCard.render(projectCardHtmlTemplate);
             projectsWrapper === null || projectsWrapper === void 0 ? void 0 : projectsWrapper.appendChild(projectCardElement);
             bindOpenLinkButton(projectCardElement.querySelector('button.project-card__link-to-project'));
-            projectCardElement.style.transitionDelay = `${(index + 1) * 200}ms`;
+            projectCardElement.style.transitionDelay = `${(index + 1) * SCROLL_REAVEAL_ANIMATION_DELAY}ms`;
             scrollAnimationObserver.observe(projectCardElement);
             projectCardElementList.push(projectCardElement);
         }));
-        const projectsTagsLists = projectCards.map(projectCard => projectCard.tags);
+        const projectsTagsLists = projectCards.map((projectCard) => projectCard.tags);
         const projectsTagsListWithDuplicates = [].concat(...projectsTagsLists);
         const projectsTagsList = projectsTagsListWithDuplicates.filter((elem, index, self) => index === self.indexOf(elem));
         populateTagsSelectorDialog(projectsTagsList);
     });
 }
+// ---------------------------
+//    SETUP NICE ANIMATIONS
+// ---------------------------
 // mouse trailer
+const MOUSE_TRAILER_ANIMATION_DURATION = 600;
 const isDeviceTouch = 'ontouchstart' in document.documentElement;
 const trailer = document.querySelector('.trailer');
 if (isDeviceTouch)
@@ -80,11 +90,11 @@ if (isDeviceTouch)
 const animateTrailer = (e, interacting) => {
     const x = e.clientX - (trailer === null || trailer === void 0 ? void 0 : trailer.offsetWidth) / 2, y = e.clientY - (trailer === null || trailer === void 0 ? void 0 : trailer.offsetHeight) / 2;
     const keyframes = {
-        transform: `translate(${x}px, ${y}px) scale(${interacting ? 3 : 1})`
+        transform: `translate(${x}px, ${y}px) scale(${interacting ? 3 : 1})`,
     };
     trailer.animate(keyframes, {
-        duration: 600,
-        fill: 'forwards'
+        duration: MOUSE_TRAILER_ANIMATION_DURATION,
+        fill: 'forwards',
     });
 };
 const getTrailerIconSrc = (interactableType) => {
@@ -106,12 +116,16 @@ window.addEventListener('mousemove', (e) => {
     let interacting = interactable !== null;
     const icon = document.querySelector('.trailer-icon');
     animateTrailer(e, interacting);
-    trailer.dataset.interactableType = interacting ? interactable.getAttribute('data-interactable-type') : '';
+    trailer.dataset.interactableType = interacting
+        ? interactable.getAttribute('data-interactable-type')
+        : '';
     if (interacting) {
         icon.src = getTrailerIconSrc(interactable.getAttribute('data-interactable-type'));
     }
 });
 // changing text animation
+const CHANGING_TEXT_ANIMATION_DURATION = 400;
+const CHANGING_TEXT_ANIMATION_REPETITION_DELAY = 3000;
 const changingTextElAnimObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -123,22 +137,28 @@ const changingTextElAnimObserver = new IntersectionObserver((entries) => {
     });
 });
 const changingTextElements = document.querySelectorAll('.changing-text');
-changingTextElements.forEach(element => {
-    const textVariations = [element.innerText].concat(element.getAttribute('data-text-variations').split(';'));
+changingTextElements.forEach((element) => {
+    const otherTextVariations = element
+        .getAttribute('data-text-variations')
+        .split(';');
+    const textVariations = [element.innerText].concat(otherTextVariations);
+    console.log(otherTextVariations);
+    if (otherTextVariations[0] === '' || otherTextVariations.length === 0)
+        return;
     let currentTextIndex = 0;
     let intervalID = setInterval(() => __awaiter(void 0, void 0, void 0, function* () {
         if (element.classList.contains('hidden'))
             return;
         currentTextIndex = (currentTextIndex + 1) % textVariations.length;
         element.classList.add('text-disappearing');
-        yield wait(400);
+        yield wait(CHANGING_TEXT_ANIMATION_DURATION);
         element.classList.add('text-disappeared');
         element.classList.remove('text-disappearing');
         element.dataset.currentText = textVariations[currentTextIndex];
-        yield wait(50);
+        yield wait(5);
         element.classList.remove('text-disappeared');
-        yield wait(400);
-    }), 3000);
+        yield wait(CHANGING_TEXT_ANIMATION_DURATION);
+    }), CHANGING_TEXT_ANIMATION_REPETITION_DELAY);
     if (window.matchMedia('(prefers-reduced-motion').matches) {
         clearInterval(intervalID);
     }
@@ -154,7 +174,11 @@ const scrollAnimationObserver = new IntersectionObserver((entries) => {
 });
 const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
 scrollRevealElements.forEach((el) => scrollAnimationObserver.observe(el));
+// ---------------------------
+//    SETUP FUNCTIONALITIES
+// ---------------------------
 // form validation
+const INPUT_DEBOUNCE_TIME = 500;
 const inputFieldsElements = [...document.querySelectorAll('.input-field')];
 const labels = inputFieldsElements.map((element) => element.querySelector('label'));
 const formInputs = inputFieldsElements.map((element) => element.querySelector('input, textarea'));
@@ -186,7 +210,7 @@ const handleInputChange = (input, index) => {
                 inputFieldsElements[index].classList.add('invalid');
                 labels[index].innerText = `${labelDefaultText} - ${input.getAttribute('data-field-invalid-message')}`;
             }
-        }, 500);
+        }, INPUT_DEBOUNCE_TIME);
     }
 };
 formInputs.forEach((input, index) => {
@@ -210,7 +234,7 @@ formButton === null || formButton === void 0 ? void 0 : formButton.addEventListe
         let formData = {};
         formInputs.forEach((input, index) => {
             formData[input.getAttribute('name')] = input.value;
-            input.value = "";
+            input.value = '';
             inputFieldsElements[index].classList.add('empty');
         });
         console.log(formData);
@@ -235,7 +259,7 @@ sortButton.onclick = () => {
         (_a = sortButton.querySelector('.sort-icon')) === null || _a === void 0 ? void 0 : _a.classList.remove('close');
         selectedTags = [];
         updateShownProjectCards();
-        tagsWrapper.childNodes.forEach(tagElement => tagElement.classList.remove('selected'));
+        tagsWrapper.childNodes.forEach((tagElement) => tagElement.classList.remove('selected'));
     }
     else {
         tagsSelectorDialog.show();
@@ -243,7 +267,7 @@ sortButton.onclick = () => {
     }
 };
 function populateTagsSelectorDialog(tagsList) {
-    tagsList.map(tag => {
+    tagsList.map((tag) => {
         const tagElement = document.createElement('button');
         tagElement.classList.add('tag');
         tagElement.innerText = tag;
@@ -263,7 +287,7 @@ function populateTagsSelectorDialog(tagsList) {
 function updateShownProjectCards() {
     projectCardElementList.forEach((projectCardElement, index) => {
         const projectCardTags = projectCards[index].tags;
-        const selectedProjectCardTags = projectCardTags.filter(tag => selectedTags.includes(tag));
+        const selectedProjectCardTags = projectCardTags.filter((tag) => selectedTags.includes(tag));
         projectCardElement.classList.toggle('shown', selectedProjectCardTags.length >= selectedTags.length);
     });
 }

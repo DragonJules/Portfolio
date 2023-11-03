@@ -1,6 +1,7 @@
 import './utils.js'
 import './string.js'
 
+const projectCardClasses = ['project-card', 'glass', 'scroll-reveal', 'shown']
 
 export class ProjectCard {
     name: string;
@@ -21,10 +22,7 @@ export class ProjectCard {
 
     async render(projectCardHtmlTemplate: string): Promise<HTMLDivElement> { 
         const projectCard = document.createElement('div')
-        projectCard.classList.add('project-card')
-        projectCard.classList.add('glass')
-        projectCard.classList.add('scroll-reveal')
-        projectCard.classList.add('shown')
+        projectCardClasses.forEach(className => projectCard.classList.add(className))
 
         let projectURL = this.url
         let disabled = ''
