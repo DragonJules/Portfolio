@@ -97,6 +97,7 @@ html {
 @font-face {
   font-family: "Quicksand";
   src: url("../../assets/fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
+  font-display: swap;
 }
 *,
 *::before,
@@ -183,9 +184,6 @@ p {
   h3 {
     font-size: 1.5rem;
   }
-  h4 {
-    font-size: 1.3rem;
-  }
   p {
     font-size: 1.2rem;
   }
@@ -199,9 +197,6 @@ p {
   }
   h3 {
     font-size: 2rem;
-  }
-  h4 {
-    font-size: 1.55rem;
   }
   p {
     font-size: 1.5rem;
@@ -480,7 +475,7 @@ body:hover > .trailer {
   right: 0;
   overflow: hidden;
   z-index: -1;
-  background: radial-gradient(80vw circle at 60% 80%, hsl(249, 57%, 35%), transparent 100%), radial-gradient(48vw circle at 10% 60%, hsl(233, 74%, 35%), transparent 100%), radial-gradient(50vw circle at 75% 30%, #1c3097, transparent 100%), radial-gradient(76vw circle at 5% 7%, hsl(258, 70%, 35%), transparent 100%);
+  background: radial-gradient(80vw circle at 60% 80%, #36268c, transparent 100%), radial-gradient(48vw circle at 10% 60%, #17269c, transparent 100%), radial-gradient(50vw circle at 75% 30%, #1c3097, transparent 100%), radial-gradient(76vw circle at 5% 7%, #421c99, transparent 100%);
 }
 .background::after {
   position: absolute;
@@ -524,6 +519,7 @@ body:hover > .trailer {
 }
 .hero .container button img {
   height: 1.5rem;
+  width: 1.5rem;
   animation: stretch 3s infinite ease-in-out;
   opacity: 0;
   transition: opacity 1.5s ease;
@@ -571,7 +567,7 @@ body:hover > .trailer {
   gap: var(--padding-mid);
   flex-wrap: wrap;
 }
-.home .home__wrapper .tech-i-use h4 {
+.home .home__wrapper .tech-i-use h3 {
   font-weight: 500;
 }
 

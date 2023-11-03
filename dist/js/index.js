@@ -100,13 +100,13 @@ const animateTrailer = (e, interacting) => {
 const getTrailerIconSrc = (interactableType) => {
     switch (interactableType) {
         case 'scroll':
-            return 'assets/images/scroll-cta.svg';
+            return 'assets/images/vector/scroll-cta.svg';
         case 'ext':
-            return 'assets/images/arrow-ext.svg';
+            return 'assets/images/vector/arrow-ext.svg';
         case 'filter':
-            return 'assets/images/filter.svg';
+            return 'assets/images/vector/filter.svg';
         default:
-            return 'assets/images/arrow-right.svg';
+            return 'assets/images/vector/arrow-right.svg';
     }
 };
 window.addEventListener('mousemove', (e) => {
@@ -142,7 +142,6 @@ changingTextElements.forEach((element) => {
         .getAttribute('data-text-variations')
         .split(';');
     const textVariations = [element.innerText].concat(otherTextVariations);
-    console.log(otherTextVariations);
     if (otherTextVariations[0] === '' || otherTextVariations.length === 0)
         return;
     let currentTextIndex = 0;

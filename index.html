@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://kit.fontawesome.com/77948c1566.js" crossorigin="anonymous"></script>
+    <meta name="description" content="Personal developer Portfolio, for me, Jules. It presents my projects, my main skills and what I like. You can also contact me through a form at the end of the page.">
+    <meta name="theme-color" content="#36268c"/>
+
+    <script src="https://kit.fontawesome.com/77948c1566.js" crossorigin="anonymous" defer></script>
     
     <script src="dist/js/index.js" defer type="module"></script>
     <link rel="stylesheet" href="dist/css/style.css">
 
     <title>Portfolio</title>
 
-
-    <link rel="preload" href="dist/css/style.css" as="style">
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    
+    <link rel="icon" href="assets/images/vector/favicon.svg" type="image/svg">
 
 </head>
 <body>
@@ -40,7 +38,7 @@
     </div>
 
     <div class="trailer">
-        <img src="assets/images/arrow-ext.svg" alt="trailer icon" class="trailer-icon">
+        <img src="assets/images/vector/arrow-ext.svg" alt="trailer icon" class="trailer-icon">
     </div>
 
     <div class="background">
@@ -50,8 +48,8 @@
     <section class="hero">
         <div class="container glass scroll-reveal">
             <h1 class="changing-text-parent">Hi, I'm <strong class="changing-text" data-text-variations="" data-current-text="Jules">Jules</strong></h1>
-            <button data-section-index="1" class="no-style-button scroll-to-section-button interactable" data-interactable-type="scroll">
-                <img src="assets/images/scroll-cta.svg" alt="arrow scroll">
+            <button data-section-index="1" class="no-style-button scroll-to-section-button interactable" data-interactable-type="scroll" name="scroll page call to action" aria-label="scroll page call to action">
+                <img src="assets/images/vector/scroll-cta.svg" alt="arrow scroll">
             </button>
         </div>
     </section>
@@ -73,7 +71,7 @@
                 <h2><strong>Tech</strong> I master</h2>
                 <ul>
                     <li>
-                        <h4>JavaScript and TypeScript</h4>
+                        <h3>JavaScript and TypeScript</h3>
                         <p>
                             I'm very familiar with Javascript, which I first used with Node.js to create bots for Discord using the discord.js library.
                             <br>Today, I use Javascript for the front-end and back-end with Node.js and Express.js. So far I've never used a Javascript Framework, but I'm interested in learning and using one of these technologies, although I haven't yet felt the need to do so for my personal projects.
@@ -81,7 +79,7 @@
                         </p>    
                     </li>
                     <li>
-                        <h4>Front End development</h4>
+                        <h3>Front End development</h3>
                         <p>
                             I love creating web pages it's one of my favorite part of development. I've aquired the knowledge for this through the creation of lots of small projects that you will discover.
                             <br>I've mastered HTML and CSS almost completely, enabling me to create amazing projects like the one you currently look at. I now mostly use SCSS that I really like.
@@ -91,16 +89,16 @@
                     <li>
                         <ul class="others">
                             <li>
-                                <h4>Python</h4>
+                                <h3>Python</h3>
                             </li>
                             <li>
-                                <h4>Java</h4>
+                                <h3>Java</h3>
                             </li>
                             <li>
-                                <h4>Kotlin</h4>
+                                <h3>Kotlin</h3>
                             </li>
                             <li>
-                                <h4>Lua</h4>
+                                <h3>Lua</h3>
                             </li>
                         </ul>
                     </li>
@@ -112,7 +110,7 @@
         <div class="projects__header glass-header scroll-reveal">
             <h2>My <strong>Projects</strong></h2>
             <div class="projects__sort">
-                <button class="projects__sort--sort-button no-style-button">
+                <button class="projects__sort--sort-button no-style-button" name="sort projects by tag" aria-label="sort projects by tag">
                     <div class="sort-icon">
                         <span></span>
                         <span></span>
@@ -153,7 +151,7 @@
                 </form>
                 <button class="contact__submit-button interactable" data-interactable-type="default">
                     Send Message
-                    <img src="assets/images/arrow-right.svg" alt="arrow">
+                    <img src="assets/images/vector/arrow-right.svg" alt="arrow">
                 </button>
             </div>
             <div class="contact__socials glass scroll-reveal" style="transition-delay: 400ms;">
