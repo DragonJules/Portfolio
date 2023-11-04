@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <svg viewBox="0 0 200 200" xmlns='http://www.w3.org/2000/svg' style="display: none;">
+    <svg viewBox="0 0 200 200" xmlns='http://www.w3.org/2000/svg' style="display: none;" aria-hidden="true">
         <filter id='noiseFilter'>
             <feTurbulence 
             type='fractalNoise' 
@@ -37,11 +37,11 @@
         <p>Toast</p>
     </div>
 
-    <div class="trailer">
+    <div class="trailer" aria-hidden="true">
         <img src="assets/images/vector/arrow-ext.svg" alt="trailer icon" class="trailer-icon">
     </div>
 
-    <div class="background">
+    <div class="background" aria-hidden="true">
 
     </div>
 
@@ -110,7 +110,7 @@
         <div class="projects__header glass-header scroll-reveal">
             <h2>My <strong>Projects</strong></h2>
             <div class="projects__sort">
-                <button class="projects__sort--sort-button no-style-button" name="sort projects by tag" aria-label="sort projects by tag">
+                <button class="projects__sort--sort-button no-style-button" name="sort projects by tag" aria-label="sort projects by tag" aria-expanded="false" aria-controls="tag-selector">
                     <div class="sort-icon">
                         <span></span>
                         <span></span>
@@ -118,7 +118,7 @@
                     </div>
                 </button>
 
-                <dialog class="projects__sort--tags-selector-dialog glass">
+                <dialog class="projects__sort--tags-selector-dialog glass" id="tag-selector">
                     <div class="projects__sort--tag-list-wrapper"></div>
                 </dialog>
             </div>
@@ -149,7 +149,7 @@
                         <textarea name="message" id="message" required placeholder="Message" data-field-invalid-message="Required"></textarea>
                     </div>
                 </form>
-                <button class="contact__submit-button interactable" data-interactable-type="default">
+                <button class="contact__submit-button interactable" data-interactable-type="default" aria-label="Send Message">
                     Send Message
                     <img src="assets/images/vector/arrow-right.svg" alt="arrow">
                 </button>
@@ -157,29 +157,29 @@
             <div class="contact__socials glass scroll-reveal" style="transition-delay: 400ms;">
                 <h3>My <strong>Socials</strong></h3>
 
-                <ul>
+                <ul aria-label="Links to my socials">
                     <li>
-                        <a href="mailto:itzdragon.contact@gmail.com" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                        <a aria-label="Send me an email" href="mailto:itzdragon.contact@gmail.com" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
                             <div class="icon"><i class="fa-regular fa-envelope"></i></div>Email
                         </a>
                     </li>
                     <li>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                        <a aria-label="Linkdin account" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
                             <div class="icon"><i class="fa-brands fa-linkedin"></i></div>Linkedin
                         </a>
                     </li>
                     <li>
-                        <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                        <a aria-label="Discord Server" href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
                             <div class="icon"><i class="fa-brands fa-discord"></i></div>Discord
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/DragonJules" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                        <a aria-label="Github account" href="https://github.com/DragonJules" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
                             <div class="icon"><i class="fa-brands fa-github"></i></div>Github
                         </a>
                     </li>
                     <li>
-                        <a href="https://twitter.com/_ItzDragon_" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
+                        <a aria-label="Twitter account" href="https://twitter.com/_ItzDragon_" target="_blank" rel="noopener noreferrer" class="interactable" data-interactable-type="ext">
                             <div class="icon"><i class="fa-brands fa-twitter"></i></div>Twitter
                         </a>
                     </li>

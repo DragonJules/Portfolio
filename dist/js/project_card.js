@@ -45,6 +45,7 @@ export class ProjectCard {
                 const tagElement = document.createElement('span');
                 tagElement.classList.add('tag');
                 tagElement.innerText = tag;
+                tagElement.setAttribute('aria-label', `Tag ${tag}`);
                 tagsWrapper.appendChild(tagElement);
             });
             return projectCard;

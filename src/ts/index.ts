@@ -353,6 +353,7 @@ sortButton.onclick = () => {
 		tagsSelectorDialog.close();
 
 		sortButton.querySelector('.sort-icon')?.classList.remove('close');
+		sortButton.setAttribute('aria-expanded', 'false');
 
 		selectedTags = [];
 		updateShownProjectCards();
@@ -361,6 +362,7 @@ sortButton.onclick = () => {
 	} else {
 		tagsSelectorDialog.show();
 		sortButton.querySelector('.sort-icon')?.classList.add('close');
+		sortButton.setAttribute('aria-expanded', 'true');
 	}
 };
 
@@ -371,13 +373,17 @@ function populateTagsSelectorDialog(tagsList: string[]) {
 		tagElement.innerText = tag;
 		tagsWrapper.appendChild(tagElement);
 
+		tagElement.setAttribute('aria-label', `Select Tag: ${tag}`);
+
 		tagElement.onclick = () => {
 			tagElement.classList.toggle('selected');
 
 			if (tagElement.classList.contains('selected')) {
 				selectedTags.push(tag);
+				tagElement.setAttribute('aria-label', `Unselect Tag: ${tag}`);
 			} else {
 				selectedTags.splice(selectedTags.indexOf(tag), 1);
+				tagElement.setAttribute('aria-label', `Unselect Tag: ${tag}`);
 			}
 
 			updateShownProjectCards();

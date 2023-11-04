@@ -256,6 +256,7 @@ sortButton.onclick = () => {
     if (tagsSelectorDialog.open) {
         tagsSelectorDialog.close();
         (_a = sortButton.querySelector('.sort-icon')) === null || _a === void 0 ? void 0 : _a.classList.remove('close');
+        sortButton.setAttribute('aria-expanded', 'false');
         selectedTags = [];
         updateShownProjectCards();
         tagsWrapper.childNodes.forEach((tagElement) => tagElement.classList.remove('selected'));
@@ -263,6 +264,7 @@ sortButton.onclick = () => {
     else {
         tagsSelectorDialog.show();
         (_b = sortButton.querySelector('.sort-icon')) === null || _b === void 0 ? void 0 : _b.classList.add('close');
+        sortButton.setAttribute('aria-expanded', 'true');
     }
 };
 function populateTagsSelectorDialog(tagsList) {
@@ -271,13 +273,16 @@ function populateTagsSelectorDialog(tagsList) {
         tagElement.classList.add('tag');
         tagElement.innerText = tag;
         tagsWrapper.appendChild(tagElement);
+        tagElement.setAttribute('aria-label', `Select Tag: ${tag}`);
         tagElement.onclick = () => {
             tagElement.classList.toggle('selected');
             if (tagElement.classList.contains('selected')) {
                 selectedTags.push(tag);
+                tagElement.setAttribute('aria-label', `Unselect Tag: ${tag}`);
             }
             else {
                 selectedTags.splice(selectedTags.indexOf(tag), 1);
+                tagElement.setAttribute('aria-label', `Unselect Tag: ${tag}`);
             }
             updateShownProjectCards();
         };
