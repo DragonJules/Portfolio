@@ -12,3 +12,6 @@ exclude:
   - package-lock.json
   - package.json
   - tsconfig.json
+  - readme/
+  - README.md
+  - .gitignore
