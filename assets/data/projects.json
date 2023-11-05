@@ -20,7 +20,7 @@
             "name":"Shop Bot", 
             "tags": ["Finished", "Public"],
             "thumbnail_src": "assets/images/shopbot.webp", 
-            "description": "This open source, self-hosted, Discord bot developed in JavaScript, with the latest version of Discord's API, allows anyone to create easily virtual shops and currencies on their Discord server. It uses local database with JSON, and Discord's latest functionalities for bots, in order to create the best possible experience for both adminitrators and users.", 
+            "description": "This open source, self-hosted, Discord bot developed in JavaScript, with the latest version of Discord's API, allows anyone to create easily virtual shops and currencies on their Discord server. It uses local database with JSON, and Discord's latest functionalities for bots, in order to create the best possible experience for both administrators and users.", 
             "url": "https://github.com/DragonJules/ShopBot",
             "date": "June 2023"
         },
@@ -36,7 +36,7 @@
             "name":"Syntax", 
             "tags": ["In Progress", "Public"],
             "thumbnail_src": "assets/images/syntax.webp", 
-            "description": "Syntax is a silly project, that I developed in a few hours, and that just strings by other strings. But it has a funny application, and I want to finish it so it's easy to use.", 
+            "description": "Syntax is a silly project, that I developed in a few hours, and that just replaces strings by other strings. But it has a funny application, and I want to finish it so it's easy to use.", 
             "url": "https://github.com/DragonJules/SYNTAX/",
             "date": "May 2022"
         },
